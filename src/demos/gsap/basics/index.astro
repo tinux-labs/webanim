@@ -7,5 +7,24 @@ import "./styles.css"
 </div>
 
 <script>
-  console.log("Hello from basics")
+  import gsap from "gsap"
+
+  document.addEventListener("astro:page-load", () => {
+    const card = document.querySelector(".card");
+    if (!card) return;
+    gsap.from(card, {
+      opacity: 0,
+      duration: 2,
+      scale: 0.5,
+      onComplete: () => {
+        gsap.from(".card", {
+          y: -20,
+          repeat: -1,
+          yoyo: true,
+          duration: 0.5,
+          ease: "power1",
+        })
+      }
+    })
+  })
 </script>
