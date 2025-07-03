@@ -1,7 +1,15 @@
 ---
+import { getAllDemos } from '~/utils/allDemos';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const demos = getAllDemos()
 ---
 
 <BaseLayout>
 	<h1>Web animations</h1>
+	<ul>
+		{demos.map(demo => (
+			<li><a href={demo.slug}>{demo.title}</a></li>
+		))}
+	</ul>
 </BaseLayout>
