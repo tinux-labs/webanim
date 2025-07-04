@@ -1,5 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import Card from '~/components/Card.astro';
+import Container from '~/components/Container.astro';
+import BaseLayout from '~/layouts/BaseLayout.astro';
 
 
 export async function getStaticPaths() {
@@ -27,7 +30,19 @@ const demos = allDemos.filter(
   demo => demo.data.category.toLowerCase() === category.toLocaleLowerCase())
   .sort((a, b) => new Date(b.data.date ?? 0).getTime() - new Date(a.data.date ?? 0).getTime())
 ---
+<BaseLayout>
+  <Container>
+    <h1>{category.toUpperCase()} <span>Animations</span></h1>
+    <p>
+      Simple web animation created with {category}.
+    </p>
 
-<pre>
-  {JSON.stringify(demos, null, 2)}
-</pre>
+    <section>
+        <div class="grid grid-cols-4 gap-4">
+          {demos.map(demo => (
+            <Card title={demo.data.title} slug={demo.slug} colors={demo.data.colors} />
+          ))}
+        </div>
+    </section>
+  </Container>
+</BaseLayout>

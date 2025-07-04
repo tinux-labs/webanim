@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '~/components/Card.astro';
+import Container from '~/components/Container.astro';
 
 const allDemos = await getCollection("demos")
 
@@ -23,20 +25,23 @@ for (const category in grouped) {
 ---
 
 <BaseLayout>
-	<h1>Web animations</h1>
-	{Object.entries(grouped).map(([category, demos]) => (
-		<section>
-			<div class="flex w-full gap-4">
-				<h2>{category.toUpperCase()}</h2>
-				<a href={`/${category}`}>View all</a>
-			</div>
-			<ul>
-				{demos.map(demo => (
-					<li>
-						<a href={demo.slug}>{demo.data.title}</a>
-					</li>
-				))}
-			</ul>
-		</section>
-	))}
+	 <Container>
+		<h1>Web <span>Animations</span></h1>
+		<p>
+			Simple web animation examples to learn and explore popular libraries.
+		</p>
+		{Object.entries(grouped).map(([category, demos]) => (
+			<section>
+				<div class="flex w-full justify-between items-center">
+					<h2>{category.toUpperCase()}</h2>
+					<a href={`/${category}`}>View all</a>
+				</div>
+				<div class="grid grid-cols-4 gap-4">
+					{demos.map(demo => (
+						<Card title={demo.data.title} slug={demo.slug} colors={demo.data.colors} />
+					))}
+				</div>
+			</section>
+		))}
+	 </Container>
 </BaseLayout>

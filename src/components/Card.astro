@@ -1,0 +1,28 @@
+---
+export type Props = {
+  title: string
+  slug: string
+  colors?: Array<string> | string | null
+}
+
+const { title, slug, colors } = Astro.props
+
+let colorArr: Array<string>
+
+if (!colors) {
+  colorArr = ["#1C2A38", "#1C2A38"]
+} else if (Array.isArray(colors)) {
+  colorArr = colors.length >= 2 ? colors : [colors[0], colors[0]]
+} else {
+  colorArr = [colors, colors]
+}
+
+const gradient = `linear-gradient(to bottom right, ${colorArr.join(', ')})`
+---
+
+<div class="flex flex-col gap-2">
+  <a href={slug}>
+    <span class="sr-only">{title}</span>
+    <div class="w-full aspect-square" style={`background: ${gradient}`} /></a>
+  <a href={slug}>{title}</a>
+</div>
