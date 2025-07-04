@@ -1,7 +1,9 @@
 ---
-layout: "~/layouts/DocumentLayout.astro"
 title: Gsap Basics
 component: "gsap/basics"
+category: "gsap"
+colors: ["#4D5456", "#676D73"]
+date: 2025-07-01
 ---
 
 ### Basic Animation

@@ -1,7 +1,9 @@
 ---
-layout: "~/layouts/DocumentLayout.astro"
 title: Gsap Controls
 component: "gsap/controls"
+category: "gsap"
+colors: ["#192633", "#436071"]
+date: 2025-07-02
 ---
 
 This example demonstrates how to use GSAP to create a basic animation (tween)

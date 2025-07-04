@@ -1,15 +1,15 @@
 ---
-import { getAllDemos } from '~/utils/allDemos';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const demos = getAllDemos()
+const demos = await getCollection("demos")
 ---
 
 <BaseLayout>
 	<h1>Web animations</h1>
 	<ul>
 		{demos.map(demo => (
-			<li><a href={demo.slug}>{demo.title}</a></li>
+			<li><a href={demo.slug}>{demo.data.title}</a></li>
 		))}
 	</ul>
 </BaseLayout>
