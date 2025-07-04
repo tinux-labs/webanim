@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+
+
+export async function getStaticPaths() {
+  const allDemos = await getCollection("demos")
+  const categories = [...new Set(allDemos.map(demo => demo.data.category.toLowerCase()))]
+
+  return categories.map(category => ({
+    params: { 
+      category
+    },
+    props: {
+      allDemos
+    }
+  }))
+}
+
+const { category } = Astro.params
+const { allDemos } = Astro.props
+
+if (!category) {
+  throw new Response("Not found", {status: 404})
+}
+
+const demos = allDemos.filter(
+  demo => demo.data.category.toLowerCase() === category.toLocaleLowerCase())
+  .sort((a, b) => new Date(b.data.date ?? 0).getTime() - new Date(a.data.date ?? 0).getTime())
+---
+
+<pre>
+  {JSON.stringify(demos, null, 2)}
+</pre>
