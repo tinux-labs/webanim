@@ -20,9 +20,9 @@ if (!colors) {
 const gradient = `linear-gradient(to bottom right, ${colorArr.join(', ')})`
 ---
 
-<div class="flex flex-col gap-2">
-  <a href={slug}>
+<div class="flex flex-col gap-2 items-center">
+  <a href={slug} class="inline-block w-full aspect-square">
     <span class="sr-only">{title}</span>
-    <div class="w-full aspect-square" style={`background: ${gradient}`} /></a>
-  <a href={slug}>{title}</a>
+    <div class="w-full aspect-square rounded-2xl" style={`background: ${gradient}`} /></a>
+  <a href={slug} class="text-sm">{title}</a>
 </div>

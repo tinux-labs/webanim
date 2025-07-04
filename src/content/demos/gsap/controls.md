@@ -1,5 +1,5 @@
 ---
-title: Gsap Controls
+title: Controls
 component: "gsap/controls"
 category: "gsap"
 colors: ["#192633", "#436071"]

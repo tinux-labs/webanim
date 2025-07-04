@@ -1,10 +1,20 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --font-sans: "Inter Variable", sans-serif;
+  --font-display: "Crimson Pro Variable", serif;
+
+  --color-canvas: #111111;
+  --color-canvas-secondary: #161616;
+  --color-fg: #e7e7e7;
+  --color-fg-muted: #a0a0a0;
+}
+
 html {
   color-scheme: dark;
 }
 
 body {
-  @apply bg-neutral-950 text-neutral-100;
+  @apply bg-canvas text-fg;
 }
