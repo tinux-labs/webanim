@@ -1,0 +1,74 @@
+<style scoped>
+  @import "./styles.css";
+</style>
+
+<div class="flex flex-col items-center">
+  <div class="circle">
+    <span class="mark"></span>
+  </div>
+  <div class="mt-12 flex items-center gap-6 flex-wrap justify-center">
+    <button class="button" id="play">Play</button>
+    <button class="button" id="pause">Pause</button>
+    <button class="button" id="resume">Resume</button>
+    <button class="button" id="restart">Restart</button>
+    <button class="button" id="kill">Kill</button>
+  </div>
+</div>
+
+<script>
+
+import gsap from "gsap"
+
+let tween: GSAPTween | null = null
+
+let handlePlay: () => void
+let handlePause: () => void
+let handleResume: () => void
+let handleRestart: () => void
+let handleKill: () => void
+
+function setup() {
+  const circle = document.querySelector(".circle")
+  if (!circle) return
+
+  tween = gsap.from(circle, {
+    rotate: -360,
+    duration: 12,
+    repeat: -1,
+    ease: 'linear',
+    transformOrigin: "center center"
+  })
+
+  const playButton = document.getElementById("play")
+  const pauseButton = document.getElementById("pause")
+  const resumeButton = document.getElementById("resume")
+  const restartButton = document.getElementById("restart")
+  const killButton = document.getElementById("kill")
+
+  handlePlay = () => tween?.play()
+  handlePause = () => tween?.pause()
+  handleResume = () => tween?.resume()
+  handleRestart = () => tween?.restart()
+  handleKill = () => tween?.kill()
+
+  playButton?.addEventListener("click", handlePlay)
+  pauseButton?.addEventListener("click", handlePause)
+  resumeButton?.addEventListener("click", handleResume)
+  restartButton?.addEventListener("click", handleRestart)
+  killButton?.addEventListener("click", handleKill)
+}
+
+function cleanup() {
+  document.getElementById("play")?.removeEventListener("click", handlePlay)
+  document.getElementById("pause")?.removeEventListener("click", handlePause)
+  document.getElementById("resume")?.removeEventListener("click", handleResume)
+  document.getElementById("restart")?.removeEventListener("click", handleRestart)
+  document.getElementById("kill")?.removeEventListener("click", handleKill)
+
+  tween?.kill()
+  tween = null
+}
+
+document.addEventListener("astro:page-load", setup)
+document.addEventListener("astro:before-swap", cleanup)
+</script>
