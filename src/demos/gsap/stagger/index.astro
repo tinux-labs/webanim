@@ -1,0 +1,44 @@
+
+<style scoped>
+  @import "./styles.css";
+</style>
+
+<div class="grid place-items-center gap-12">
+  <div class="flex flex-col items-center gap-4">
+    <div class="stagger-box"/>
+    <div class="stagger-box"/>
+    <div class="stagger-box"/>
+  </div>
+
+  <div class="flex items-center">
+    <button class="text-sm px-6 py-2 bg-primary text-fg" id="restart">Restart</button>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap"
+
+  document.addEventListener("astro:page-load", () => {
+    const restart = document.querySelector("#restart")
+    const boxes = document.querySelectorAll(".stagger-box")
+    if (!restart || !boxes) return
+    const tween = gsap.fromTo(boxes, {
+      x: -200
+    },{
+      x: 200,
+      duration: 2,
+      stagger: 0.2,
+      ease: "power1.inOut"
+    })
+
+    function handleRestart() {
+      tween.restart()
+    }
+
+    restart?.addEventListener("click", handleRestart)
+
+    document.addEventListener("astro:before-swap", () => {
+      restart.removeEventListener("click", handleRestart)
+    }, { once: true })
+  })
+</script>

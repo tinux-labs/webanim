@@ -1,0 +1,6 @@
+.easing-box {
+  width: 120px;
+  height: 120px;
+  background: hsl(340, 57%, 64%);
+  opacity: 0.5;
+}

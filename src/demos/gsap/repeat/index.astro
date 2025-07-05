@@ -1,0 +1,48 @@
+
+
+<style scoped>
+  @import "./styles.css";
+</style>
+
+<div class="grid place-content-center">
+  <div class="repeat"></div>
+
+  <div class="mt-4">
+    <label class="flex items-center gap-1 text-fg-muted">
+      Yoyo
+      <input type="checkbox" id="yoyo" class="accent-primary"/>
+    </label>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap"
+
+  document.addEventListener("astro:page-load", () => {
+    const el = document.querySelector(".repeat")
+    const yoyo = document.querySelector("#yoyo") as HTMLInputElement
+    if (!el) return
+    const tween = gsap.fromTo(el, {
+      x: -100,
+    }, {
+      x: 100,
+      repeat: -1,
+      duration: 3,
+      borderRadius: '50%'
+    })
+
+    function toggleYoyo() {
+      tween.restart()
+      tween.yoyo(yoyo.checked)
+    }
+
+    yoyo?.addEventListener("change", () => {
+      toggleYoyo()
+    })
+
+    document.addEventListener("astro:before-swap", () => {
+      yoyo.removeEventListener("change", toggleYoyo)
+      tween.kill()
+    }, { once: true })
+  })
+</script>

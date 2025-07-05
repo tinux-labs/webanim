@@ -1,5 +1,5 @@
 ---
-title: Basics Animation
+title: Basic Animation
 component: "gsap/basics"
 category: "gsap"
 colors: ["#4D5456", "#676D73"]

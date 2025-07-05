@@ -1,0 +1,60 @@
+---
+const demos = [
+  "power1.in",
+  "power1.inOut",
+  "power2.out",
+  "power2.inOut",
+  "power3.in",
+  "power3.out",
+  "bounce.out",
+  "steps(6)",
+  "elastic.out",
+  "back.inOut",
+]
+---
+
+<style scoped>
+  @import "./styles.css";
+</style>
+
+<div class="grid place-content-center gap-8">
+  <div class="easing-box"/>
+
+  <div>
+    <select id="easing" class="bg-canvas-secondary p-2.5 rounded-lg border border-fg/5 text-fg text-sm outline-none">
+      <option selected value="linear">linear</option>
+      {demos.map(easing => (
+      <option value={easing}>{easing}</option>
+      ))}
+    </select>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const box = document.querySelector(".easing-box")
+    const easingSelect = document.querySelector("#easing") as HTMLInputElement
+    if (!box || !easingSelect) return
+
+    let tween = animateBox(easingSelect.value)
+
+    easingSelect.addEventListener("change", () => {
+      tween.kill()
+      tween = animateBox(easingSelect.value)
+    })
+    
+    function animateBox(easing: string) {
+      return gsap.fromTo(box, {
+        x: -200
+      }, {
+        x: 200,
+        duration: 2,
+        repeat: -1,
+        ease: easing
+      })
+    }
+
+  })
+</script>
