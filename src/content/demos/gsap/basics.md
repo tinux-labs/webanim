@@ -6,8 +6,6 @@ colors: ["#4D5456", "#676D73"]
 date: 2025-07-01
 ---
 
-### Basic Animation
-
 This example demonstrates a two-phase animation:
 
 - Fade & Scale In – The `.card` element fades in from `opacity: 0` and
