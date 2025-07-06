@@ -1,0 +1,80 @@
+<div class="grid place-content-center mt-12">
+  <div class="max-w-2xl mx-auto overflow-hidden">
+    <h1 id="txt" class="text-4xl text-center leading-tight tracking-tight font-medium">
+      Break HTML text into characters, words, or lines.
+    </h1>
+  </div>
+  <div class="mt-12 flex items-center justify-center gap-4">
+    <select id="split-type" class="p-2.5 text-sm rounded bg-canvas-secondary border border-fg-muted/20">
+        <option value="chars">Characters</option>
+        <option value="words">Words</option>
+        <option value="lines">Lines</option>
+      </select>
+    <button class="text-sm px-6 py-2 bg-primary text-fg" id="restart">Restart</button>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap"
+  import { SplitText } from "gsap/SplitText"
+
+  document.addEventListener("astro:page-load", () => {
+    const text = document.getElementById("txt")
+    const restart = document.getElementById("restart")
+    const select = document.getElementById("split-type") as HTMLSelectElement
+    if (!text || !restart || !select) return
+
+    let split = SplitText.create(text, {
+      type: "chars",
+      charsClass: "border border-fg/20"
+    })
+
+    let tween = animateSplit(split.chars)
+
+    function animateSplit(elements: Element[]) {
+      return gsap.fromTo(elements, {
+        y: "100%",
+        opacity: 0
+      }, {
+        y: "0%",
+        opacity: 1,
+        duration: 0.5,
+        ease: "back.out(1.6)",
+        stagger: 0.04
+      })
+    }
+
+    function resplit() {
+      split.revert()
+
+      const type = select.value
+
+      split = SplitText.create(text, {
+        type,
+        charsClass: "border border-fg/20",
+        wordsClass: "border border-fg/20",
+        linesClass: "border border-fg/20",
+      })
+
+      const targets = {
+        chars: split.chars,
+        words: split.words,
+        lines: split.lines,
+      }[type] as Element[]
+
+      tween = animateSplit(targets)
+    }
+
+
+    restart.addEventListener("click", () => tween.restart())
+    select.addEventListener("change", resplit)
+
+    document.addEventListener("astro:before-swap", () => {
+      restart.removeEventListener("click", () => tween.restart())
+      select.removeEventListener("change", resplit)
+    }, { 
+      once: true
+    })
+  })
+
+</script>
