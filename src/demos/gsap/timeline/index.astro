@@ -1,0 +1,54 @@
+
+<style scoped>
+  @import "./styles.css";
+</style>
+
+<div class="grid grid-rows-3 h-full relative">
+  <div class="bar bar-1"></div> 
+  <div class="bar bar-2"></div>
+  <div class="bar bar-3"></div>
+
+  <div class="mask absolute top-1/2 left-1/2 -translate-1/2 overflow-hidden">
+    <h1 id="title" class="font-display text-3xl font-medium">timeline</h1>
+  </div>
+</div>
+
+<div class="mt-12 flex items-center justify-center pb-12">
+  <button id="restart" class="bg-primary text-fg px-6 py-2">Restart</button>
+</div>
+
+<script>
+  import gsap from "gsap"
+
+  document.addEventListener("astro:page-load", () => {
+    const bars = document.querySelectorAll(".bar")
+    const title = document.querySelector("#title")
+    const restart = document.querySelector("#restart")
+    if (!bars || !title) return
+
+    const tl = gsap.timeline()
+
+    tl.to(bars, {
+      scaleY: 1,
+      stagger: 0.2
+    })
+    .to(title, {
+      translateX: 0,
+    }, "-=.3")
+    .to(bars, {
+      transform: "skew(0.312rad)"
+    })
+
+    function handleRestart() {
+      tl.restart()
+    }
+
+    restart?.addEventListener("click", handleRestart)
+
+    document.addEventListener("astro:before-swap", () => {
+      restart?.removeEventListener("click", handleRestart)
+    }, {
+      once: true
+    })
+  })
+</script>

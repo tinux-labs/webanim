@@ -1,0 +1,22 @@
+.bar {
+  height: 75px;
+  width: 100%;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.bar-1 {
+  background: #222;
+}
+
+.bar-2 {
+  background: #334d50;
+}
+
+.bar-3 {
+  background: #cbcaa5;
+}
+
+.mask h1 {
+  transform: translateX(-100%);
+}
