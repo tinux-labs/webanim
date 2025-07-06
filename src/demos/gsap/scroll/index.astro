@@ -1,0 +1,91 @@
+<div id="scroll-area" class="w-full h-80 overflow-y-auto border border-fg-muted/20 scroll-smooth">
+  <div class="h-[150vh] w-full flex items-center flex-col justify-between py-12">
+    <div class="w-32 h-32 bg-amber-500 box box-1"></div>
+    <div class="w-32 h-32 bg-amber-500 box box-2"></div>
+    <div class="w-32 h-32 bg-amber-500 box box-3"></div>
+  </div>
+</div>
+
+<div class="my-4 flex items-center justify-center gap-4">
+  <select id="toggleActions" class="text-sm p-2.5 border border-fg-muted/20 rounded bg-canvas-secondary text-muted outline-none">
+        <option value="play none none none">play none none none</option>
+        <option value="restart none none none">restart none none none</option>
+        <option value="play pause resume reset">play pause resume reset</option>
+        <option value="play reverse play reverse">play reverse play reverse</option>
+        <option value="restart pause resume reset">restart pause resume reset</option>
+      </select>
+  <label class="flex items-center gap-2 text-fg-muted">
+    Show markers
+    <input type="checkbox" class="accent-primary" id="markers" />
+  </label>
+</div>  
+
+<script>
+  import gsap from "gsap"
+  import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+  document.addEventListener("astro:page-load", () => {
+    const boxes = document.querySelectorAll(".box")
+    const scroller = document.querySelector("#scroll-area")
+    const markers = document.querySelector("#markers") as HTMLInputElement
+    const toggleActions = document.querySelector("#toggleActions") as HTMLInputElement
+    if (!boxes || !scroller) return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    function initAnimation(
+      markers = false,
+      actions = "play none none none"
+    ) {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      gsap.killTweensOf(boxes)
+
+       boxes.forEach(box => {
+        gsap.set(box, {
+          clearProps: "all",
+        })
+      })
+
+      boxes.forEach(box => {
+        gsap.from(box, {
+          x: "-300%",
+          opacity: 0,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: box,
+            scroller,
+            toggleActions: actions,
+            markers,
+            start: "top bottom"
+          }
+        })
+      })
+    }
+
+    initAnimation(markers?.checked, toggleActions?.value)
+
+    markers?.addEventListener("change", () => {
+      initAnimation(markers?.checked, toggleActions?.value)
+    })
+
+    toggleActions?.addEventListener("change", () => {
+      scroller.scrollTo({ top: 0, behavior: "smooth" })
+      initAnimation(markers?.checked, toggleActions?.value)
+    })
+
+
+    document.addEventListener("astro:before-swap", () => {
+      markers?.removeEventListener("change", () => initAnimation(
+        markers?.checked,
+        toggleActions?.value
+      ))
+      toggleActions?.removeEventListener("change", () => initAnimation(
+        markers?.checked,
+        toggleActions?.value
+      ))
+    }, {
+      once: true
+    })
+  })
+</script>
