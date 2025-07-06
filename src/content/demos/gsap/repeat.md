@@ -3,7 +3,7 @@ title: Repeat
 component: "gsap/repeat"
 category: "gsap"
 colors: ["#283c86", "#45a247"]
-date: 2025-07-04
+date: 2025-07-03
 ---
 
 This example demonstrates how to use GSAP to create a basic horizontal animation

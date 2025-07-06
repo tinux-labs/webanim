@@ -1,0 +1,51 @@
+
+
+<style scoped>
+  @import "./styles.css";
+</style>
+
+<div class="grid place-content-center">
+  <div class="relative overflow-hidden mt-8 text-container cursor-pointer">
+    <h1 class="text text-1">creative</h1>
+    <h1 class="absolute text text-2">creative</h1>
+  </div>
+
+  <div class="mt-12 text-center text-sm text-fg-muted">
+    Hover the text ↑
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const tContainer = document.querySelector(".text-container")
+    const t1 = document.querySelector(".text-1")
+    const t2 = document.querySelector(".text-2")
+    if (!t1 || !t2 || !tContainer) return
+
+    const tl = gsap.timeline({defaults: { duration: 0.5, ease: "power1.inOut" }, paused: true})
+
+    tl
+      .to(t1, { y: "-100%"}, 0)
+      .to(t2, { y: 0 }, 0)
+
+    function hoverEnter() {
+      tl.play()
+    }
+
+    function hoverExit() {
+      tl.reverse()
+    }
+
+    tContainer.addEventListener("mouseenter", hoverEnter)
+    tContainer.addEventListener("mouseleave", hoverExit)
+
+    document.addEventListener("astro:before-swap", () => {
+      tContainer.removeEventListener("mouseenter", hoverEnter)
+      tContainer.removeEventListener("mouseleave", hoverExit)
+    }, {
+      once: true
+    })
+  })
+</script>
