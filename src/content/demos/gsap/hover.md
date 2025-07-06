@@ -4,6 +4,7 @@ component: "gsap/hover"
 category: "gsap"
 colors: ["#CB356B", "#BD3F32"]
 date: 2025-07-07
+tags: ["core"]
 ---
 
 This example shows how to use a GSAP timeline to create a hover effect where

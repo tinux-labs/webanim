@@ -4,6 +4,7 @@ component: "gsap/stagger"
 category: "gsap"
 colors: ["#642B73", "#C6426E"]
 date: 2025-07-05
+tags: ["core"]
 ---
 
 Stagger in GSAP allows you to delay the start of animations between multiple

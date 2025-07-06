@@ -29,6 +29,14 @@ if (!category) {
 const demos = allDemos.filter(
   demo => demo.data.category.toLowerCase() === category.toLocaleLowerCase())
   .sort((a, b) => new Date(b.data.date ?? 0).getTime() - new Date(a.data.date ?? 0).getTime())
+
+const availableTags = [...new Set(
+  demos.flatMap(demo => demo.data.tags || [])
+)].sort()
+
+function toTitleCase(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 ---
 <BaseLayout>
   <Container>
@@ -39,16 +47,52 @@ const demos = allDemos.filter(
           Fun little web animations made with {category} for smooth motion.
         </p>
       </div>
-      <section class="flex flex-col gap-2">
-          <div class="flex w-full justify-end items-center">
-            <button class="text-fg-muted">Filters</button>
+      <section class="flex flex-col gap-4">
+          <div class="flex w-full justify-end items-center gap-4">
+            <button 
+            data-tag="all"
+            class="tag-filter underline cursor-pointer text-fg-muted hover:text-fg text-sm">All</button>
+            {availableTags.map(tag => (
+              <button data-tag={tag} class=" tag-filter cursor-pointer text-fg-muted hover:text-fg text-sm">{toTitleCase(tag)}</button>
+            ))}
           </div>
           <div class="grid grid-cols-4 gap-4">
             {demos.map(demo => (
-              <Card title={demo.data.title} slug={demo.slug} colors={demo.data.colors} />
+              <div
+                  data-tags={demo.data.tags?.join(" ") ?? ""}
+                  class="card-wrapper"
+              >
+                <Card 
+                  title={demo.data.title} 
+                  slug={demo.slug} 
+                  colors={demo.data.colors} />
+              </div>
             ))}
           </div>
       </section>
     </div>
   </Container>
 </BaseLayout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter")
+    const cards = document.querySelectorAll<HTMLElement>(".card-wrapper")
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const selectedTag = btn.dataset.tag || "all"
+
+        cards.forEach(card => {
+          const cardTags = card.dataset.tags?.split(" ")
+          const shouldShow = selectedTag === "all" || cardTags?.includes(selectedTag)
+          card.style.display = shouldShow ? "block" : "none"
+          
+        })
+
+        buttons.forEach(b => b.classList.remove("underline"))
+        btn.classList.add("underline")
+      })
+    })
+  })
+</script>

@@ -4,6 +4,7 @@ component: "gsap/basics"
 category: "gsap"
 colors: ["#4D5456", "#676D73"]
 date: 2025-07-01
+tags: ["core"]
 ---
 
 This example demonstrates a two-phase animation:

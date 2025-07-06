@@ -4,6 +4,7 @@ component: "gsap/controls"
 category: "gsap"
 colors: ["#192633", "#436071"]
 date: 2025-07-02
+tags: ["core"]
 ---
 
 This example demonstrates how to use GSAP to create a basic animation (tween)

@@ -4,6 +4,7 @@ component: "gsap/easing"
 category: "gsap"
 colors: ["#2c5364", "#0f2027"]
 date: 2025-07-04
+tags: ["core"]
 ---
 
 Easing defines how an animation accelerates or decelerates over time.

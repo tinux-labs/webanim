@@ -4,6 +4,7 @@ component: "gsap/timeline"
 category: "gsap"
 colors: ["#334d50", "#cbcaa5"]
 date: 2025-07-06
+tags: ["core"]
 ---
 
 This example demonstrates how to use a GSAP Timeline to orchestrate multiple
