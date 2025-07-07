@@ -1,0 +1,13 @@
+{
+  "title": "Web Animations",
+  "description": "Simple web animation examples to learn and explore popular libraries.",
+  "image": "/og.jpg",
+  "meta": {
+    "keywords": ["gsap", "animations", "astro"]
+  },
+  "author": {
+    "twitter": "@roblesdotdev",
+    "instagram": "https://instagram.com/tinux.labs",
+    "github": "https://github.com/tinux-labs"
+  }
+}

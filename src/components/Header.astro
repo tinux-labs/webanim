@@ -1,5 +1,6 @@
 ---
 import Container from "./Container.astro";
+import config from "~/site-config.json"
 
 ---
 
@@ -8,10 +9,10 @@ import Container from "./Container.astro";
     <div class="flex w-full h-full items-center justify-between px-4">
       <a href="/" class="font-display italic text-2xl">webanim</a>
       <div class="flex items-center gap-4 text-sm text-fg-muted">
-        <a href="https://instagram.com/tinux.labs" target="_blank" rel="noopener noreferrer">
+        <a href={config.author.instagram} target="_blank" rel="noopener noreferrer">
           Instagram
         </a>
-        <a href="https://github.com/tinux-labs/webanim" target="_blank" rel="noopener noreferrer">
+        <a href={config.author.github} target="_blank" rel="noopener noreferrer">
           Github
         </a>
       </div>
