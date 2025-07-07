@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  prefetch: true,
+  prefetch: false,
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
