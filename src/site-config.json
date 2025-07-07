@@ -1,9 +1,18 @@
 {
   "title": "Web Animations",
-  "description": "Simple web animation examples to learn and explore popular libraries.",
+  "description": "A collection of simple yet effective web animation examples designed to help you learn, experiment, and explore the most popular animation libraries used in modern front-end development.",
   "image": "/og.jpg",
   "meta": {
-    "keywords": ["gsap", "animations", "astro"]
+    "keywords": [
+      "gsap",
+      "animations",
+      "astro",
+      "motion",
+      "web animations",
+      "javascript",
+      "typescript",
+      "animation demo"
+    ]
   },
   "author": {
     "twitter": "@roblesdotdev",
