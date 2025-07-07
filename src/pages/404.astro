@@ -1,0 +1,20 @@
+---
+import Container from "~/components/Container.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Container>
+    <div class="grid place-content-center mt-12">
+      <div class="flex flex-col gap-1 items-center text-center">
+        <span class="bg-primary text-fg px-2 py-1 text-xs inline-block">404</span>
+        <h1 class="text-4xl font-display">Oops! Nothing here!</h1>
+        <p class="text-fg-muted">The link might be broken, or the page may no longer exist.</p>
+      </div>
+
+      <div class="flex items-center justify-center mt-8">
+        <a href="/" class="underline text-fg-muted hover:text-fg">Back to home</a>
+      </div>
+    </div>
+  </Container>
+</BaseLayout>
