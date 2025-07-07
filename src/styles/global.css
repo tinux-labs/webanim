@@ -18,5 +18,5 @@ html {
 }
 
 body {
-  @apply bg-canvas text-fg;
+  @apply bg-canvas text-fg overflow-x-hidden antialiased min-h-screen;
 }

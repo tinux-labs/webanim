@@ -41,13 +41,13 @@ function toTitleCase(str: string): string {
 <BaseLayout>
   <Container>
     <div class="flex flex-col gap-32 pt-24">
-      <div class="flex flex-col items-center text-center">
-        <h1 class="font-display text-[56px]">{category.toUpperCase()} <span class="italic">Animations</span></h1>
-        <p class="text-fg-muted max-w-80">
+      <div class="flex flex-col items-center text-center gap-2">
+        <h1 class="font-display text-4xl sm:text-[56px]">{category.toUpperCase()} <span class="italic">Animations</span></h1>
+        <p class="text-fg-muted max-w-80 text-sm sm:text-base">
           Fun little web animations made with {category} for smooth motion.
         </p>
       </div>
-      <section class="flex flex-col gap-4">
+      <section class="flex flex-col gap-4 px-4">
           <div class="flex w-full justify-end items-center gap-4">
             <button 
             data-tag="all"
@@ -56,7 +56,7 @@ function toTitleCase(str: string): string {
               <button data-tag={tag} class=" tag-filter cursor-pointer text-fg-muted hover:text-fg text-sm">{toTitleCase(tag)}</button>
             ))}
           </div>
-          <div class="grid grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {demos.map(demo => (
               <div
                   data-tags={demo.data.tags?.join(" ") ?? ""}

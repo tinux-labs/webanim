@@ -23,9 +23,9 @@
     const boxes = document.querySelectorAll(".stagger-box")
     if (!restart || !boxes) return
     const tween = gsap.fromTo(boxes, {
-      x: -200
+      x: -150
     },{
-      x: 200,
+      x: 150,
       duration: 2,
       stagger: 0.2,
       ease: "power1.inOut"
