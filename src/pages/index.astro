@@ -38,11 +38,11 @@ for (const category in grouped) {
 					<section class="flex flex-col gap-2">
 						<div class="flex w-full justify-between items-center">
 							<h2 class="font-medium">{category.toUpperCase()}</h2>
-							<a href={`/${category}`} class="text-sm text-fg-muted">View all</a>
+							<a href={`/${category}/`} class="text-sm text-fg-muted">View all</a>
 						</div>
 						<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
 							{demos.map(demo => (
-								<Card title={demo.data.title} slug={demo.slug} colors={demo.data.colors} />
+								<Card title={demo.data.title} href={demo.slug} colors={demo.data.colors} />
 							))}
 						</div>
 					</section>

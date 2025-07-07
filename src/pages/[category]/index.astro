@@ -13,14 +13,11 @@ export async function getStaticPaths() {
     params: { 
       category
     },
-    props: {
-      allDemos
-    }
   }))
 }
 
 const { category } = Astro.params
-const { allDemos } = Astro.props
+const allDemos = await getCollection("demos")
 
 if (!category) {
   throw new Response("Not found", {status: 404})
@@ -64,7 +61,7 @@ function toTitleCase(str: string): string {
               >
                 <Card 
                   title={demo.data.title} 
-                  slug={demo.slug} 
+                  href={demo.slug} 
                   colors={demo.data.colors} />
               </div>
             ))}

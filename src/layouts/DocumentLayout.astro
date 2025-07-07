@@ -13,7 +13,7 @@ try {
 }
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={`${title} - Web Animations`}>
   <div class="min-h-screen flex flex-col">
     <section class="preview min-h-80 h-full">
       <div class="max-w-5xl mx-auto px-8 pt-12 pb-4">
@@ -27,7 +27,7 @@ try {
           <span>Back to home</span>
         </a>
         <div class="flex flex-col gap-2">
-          <a href={`/${category}`} class="no-underline">
+          <a href={`/${category}/`} class="no-underline">
             <span class="text-xs px-2 py-1 bg-primary rounded-2xl text-white">{category}</span>
           </a>
           <h1 class="text-2xl font-normal">{title}</h1>

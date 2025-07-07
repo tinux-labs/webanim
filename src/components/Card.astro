@@ -1,11 +1,11 @@
 ---
 export type Props = {
   title: string
-  slug: string
+  href: string
   colors?: Array<string> | string | null
 }
 
-const { title, slug, colors, ...rest } = Astro.props
+const { title, href, colors, ...rest } = Astro.props
 
 let colorArr: Array<string>
 
@@ -21,10 +21,10 @@ const gradient = `linear-gradient(to bottom right, ${colorArr.join(', ')})`
 ---
 
 <div class="flex flex-col gap-2 items-center" {...rest}>
-  <a href={slug} class="inline-block w-full aspect-square">
+  <a href={`/${href}/`} class="inline-block w-full aspect-square">
     <span class="sr-only">{title}</span>
     <div class="w-full aspect-square rounded-2xl" style={`background: ${gradient}`} /></a>
-  <a href={slug} class="text-sm">{title}</a>
+  <a href={`/${href}/`} class="text-sm">{title}</a>
 </div>
 
 

@@ -7,12 +7,14 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://webanim.pages.dev",
-  trailingSlash: "always",
+  base: "/",
   server: {
     port: 3000,
   },
+  trailingSlash: "always",
   prefetch: {
     prefetchAll: true,
+    defaultStrategy: "viewport",
   },
   integrations: [mdx(), sitemap()],
   vite: {
